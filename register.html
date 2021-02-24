@@ -2,7 +2,7 @@
 <html>
 
     <head>
-        <title>Register</title>
+        <title>Registration</title>
     </head>
 
     <style>
@@ -21,18 +21,32 @@
             display: inline-block;
             text-align: left;
         }
+
+        p {
+            font-size: 11px;
+            font-weight: bold;
+        }
     </style>
 
     <body>
         <form>
-            <h1>Register</h1>
+            <h1>Registration</h1>
 
             <div class="input-wrapper">
-            <label>Username</label><br>
-            <input type="text" name="username" placeholder="Enter Username" required><br><br>
+                <label>Username</label><br>
+                <input type="text" name="username" placeholder="Enter Username" pattern="[a-zA-Z0-9]{4,16}" required><br>
+                <p>
+                    • Only letters and numbers allowed<br>
+                    • Must be 4-16 characters long
+                </p><br>
 
-            <label>Password</label><br>
-            <input type="password" name="password" placeholder="Enter Password" required>
+                <label>Password</label><br>
+                <input type="password" name="password" placeholder="Enter Password" pattern="[a-zA-Z0-9]{8,16}" required><br>
+
+                <p>
+                    • Only letters and numbers allowed<br>
+                    • Must be 8-16 characters long
+                </p>
             </div><br><br>
 
             <input type="submit" value="Register"><br><br>
