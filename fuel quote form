@@ -1,1 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <title>Fuel quote form</title>
+</head>
+
+<body>
+  <main id="main-holder">
+    <h1 id="login-header">Fuel quote form</h1>
+    
+    <form action="fuel-qutoe.html">
+        <label for="gallons"> Gallons Requested</label><br>
+        <input type="number" id="gallons" name="gallons" placeholder="required" maxlength = "50" required><br>
+        
+        <label for="adr"> Address 1</label><br>
+        <input type="text" id="adr" name="address" maxlength = "100" required><br>
+        
+        date
+
+        <input type="submit" value="Calculate">
+        <form action="get-quote">
+          
+          <label for="price-per-gallons">Suggested Price / gallon :</label>
+          <input type="number" id="price-per-gallons" name="price-per-gallon" value="TBD" readonly><br><br>
+          
+          <label for="total-due">Total Amount Due :</label>
+          <input type="number" id="total-due" name="total-due" value="TBD" readonly><br><br>
+          
+        </form>
+
+    </form> 
+  
+  </main>
+</body>
+
+</html>
