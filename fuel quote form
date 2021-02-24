@@ -14,8 +14,6 @@
         <label for="gallons"> Gallons Requested</label><br>
         <input type="number" id="gallons" name="gallons" placeholder="required" maxlength = "50" required><br>
         
-        <label for="adr"> Address 1</label><br>
-        <input type="text" id="adr" name="address" maxlength = "100" required><br>
         
         date
 
