@@ -12,15 +12,15 @@
     
     <form action="get_quote.html">
         <label for="fname"> Full Name</label><br>
-        <input type="text" id="fname" name="firstname" placeholder="John M. Doe" maxlength = "50" required><br>
-        <label for="adr"> Address 1</label><br>
-        <input type="text" id="adr" name="address" maxlength = "100" required><br>
-        <label for="email"> Address 2 (optional) </label><br>
-        <input type="text" id="adr2" name="email" maxlength = "100"><br>
+        <input type="text" id="fname" name="fullname" placeholder="John M. Doe" maxlength = "50" required><br>
+        <label for="adr1"> Address 1</label><br>
+        <input type="text" id="adr1" name="address1" maxlength = "100" required><br>
+        <label for="adr2"> Address 2 (optional) </label><br>
+        <input type="text" id="adr2" name="address2" maxlength = "100"><br>
         <label for="city"> City</label><br>
         <input type="text" id="city" name="city" maxlength = "100" required><br>
-        <label for="zip">State</label><br>
-            <select id="zip" name="zip" required>
+        <label for="state">State</label><br>
+            <select id="state" name="state" required>
                 <option value="" selected="selected">Select a State</option>
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
@@ -75,7 +75,7 @@
                 <option value="WY">WY</option>
              </select><br>
         <label for="zip"> Zip Code</label><br>
-        <input type="number" id="zip" name="zip" maxlength = "9" required><br><br>
+        <input type="number" id="zip" name="zip" minlength="5" maxlength = "9" required><br><br>
         <input type="submit" value="Save">
     </form> 
   
