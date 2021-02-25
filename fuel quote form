@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Fuel quote form</title>
+</head>
+
+<section>
+  <main id="main-holder">
+    <h1 id="fuel-quote">Fuel quote form</h1>
+    
+    <form action="fuel-qutoe.html">
+        <label for="gallons"> Gallons Requested</label><br>
+        <input type="number" id="gallons" name="gallons" placeholder="required" maxlength = "50" required><br>
+</section>        
+<section>        
+  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+  <label class="tmDtpicker">
+  <input id="dtinput" type="text" name="Start" placeholder='Delivery date' data-constraints="@NotEmpty @Required @Date" />
+  </label>
+  
+  <script>
+    $(document).ready(            
+          function () {
+              $("#dtinput").datepicker({ showWeek: true, firstDay :1,                  
+                  showOtherMonths: true,
+                  selectOtherMonths: true,
+                  minDate: '0d', dateFormat: "dd-mm-yy"
+              });
+          }
+        );
+  </script>
+</section>
+<section>
+        <input type="submit" value="Calculate">
+        <form action="get-quote">
+          
+          <label for="price-per-gallons">Suggested Price / gallon :</label>
+          <input type="number" id="price-per-gallons" name="price-per-gallon" value="TBD" readonly><br><br>
+          
+          <label for="total-due">Total Amount Due :</label>
+          <input type="number" id="total-due" name="total-due" value="TBD" readonly><br><br>
+</section>          
+        </form>
+
+    </form> 
+  
+  </main>
+</body>
+
+</html>
