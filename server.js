@@ -24,7 +24,7 @@ app.post('/profile', (req, res) => {
     console.log("city: ", req.body.city)
     console.log("state: ", req.body.state)
     console.log("zip: ", req.body.zip)
-    res.render("public/success") 
+    res.render("public/success", { fullname: req.body.fullname }) 
 }) 
    
 app.listen(PORT, function(error){ 
