@@ -13,6 +13,10 @@ app.get('/', (req, res) => {
     res.redirect('login.html')
 })
 
+//Login Route
+const loginRoute = require('./routes/login')
+app.use('/login.html', loginRoute)
+
 //Register Route
 const registerRoute = require('./routes/register')
 app.use('/register.html', registerRoute)
