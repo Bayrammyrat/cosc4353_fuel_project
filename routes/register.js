@@ -6,6 +6,8 @@ router.post('/', (req, res) => {
 
     console.log('Username: ' + req.body.username)
     console.log('Password: ' + req.body.password)
+
+    res.redirect('login.html')
 })
 
 module.exports = router
