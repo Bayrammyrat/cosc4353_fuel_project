@@ -26,20 +26,23 @@ router.post('/', (req, res) => {
         state: state,
         zip: zip
       }, function(err, address) {
-        console.log(address);
+        try{
+          if(address.footnotes=='N'){
+            userArray = Object.assign(userArray, {fullname : req.body.fullname}, 
+              {address1: req.body.address1}, {address2: req.body.address2}, 
+              {city: req.body.city}, {state: req.body.state}, {zip: req.body.zip})
+              res.redirect("get_quote.html")
+          }
+          else{
+            res.redirect("profile.html")
+          }
+        }
+        catch(err){
+          res.redirect("profile.html")
+        }
+        console.log(userArray)
+        console.log(address)
       });
-
-    userArray = Object.assign(userArray, {fullname : req.body.fullname}, 
-        {address1: req.body.address1}, {address2: req.body.address2}, 
-        {city: req.body.city}, {state: req.body.state}, {zip: req.body.zip})
-    /*
-    console.log("Fullname: ", req.body.fullname)
-    console.log("address: ", req.body.address1 + " " + req.body.address2)
-    console.log("city: ", req.body.city)
-    console.log("state: ", req.body.state)
-    console.log("zip: ", req.body.zip)*/
-    console.log(userArray)
-    res.redirect("get_quote.html") 
 })
 
 
