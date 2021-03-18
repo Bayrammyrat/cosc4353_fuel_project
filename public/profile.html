@@ -4,12 +4,32 @@
 <head>
   <meta charset="UTF-8">
   <title>Profile Management</title>
+  <style>
+    h1{
+      width: 20%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      outline: none;
+    }
+    input, select{
+      width: 20%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 1px solid #555;
+      outline: none;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  </style>
 </head>
 
 <body>
   <main id="main-holder">
     <h1 id="login-header">Profile Management</h1>
-    
     <form action="/profile.html" method="POST">
         <label for="fname"> Full Name</label><br>
         <input type="text" id="fname" name="fullname" placeholder="John M. Doe" maxlength = "50" required><br>
