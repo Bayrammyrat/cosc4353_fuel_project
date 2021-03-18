@@ -21,25 +21,9 @@
 </br>
 <br>
 
-<section style="margin-bottom: 8em;">     
-  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-
-  <label class="tmDtpicker">
-  <input id="dtinput" type="text" name="Start" placeholder='Delivery date' data-constraints="@NotEmpty @Required @Date" />
-  </label>
-  
-  <script>
-    $(document).ready(            
-          function () {
-              $("#dtinput").datepicker({ showWeek: true, firstDay :1,                  
-                  showOtherMonths: true,
-                  selectOtherMonths: true,
-                  minDate: '0d', dateFormat: "dd-mm-yy"
-              });
-          }
-        );
-  </script>
+<section>
+  <label for="date">Date:</label>
+  <input type="date" id="date" name="date">
 </section>
 </br>
 
