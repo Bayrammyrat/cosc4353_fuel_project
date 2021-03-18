@@ -1,33 +1,28 @@
-const bodyparser = require('body-parser') 
-const express = require("express") 
-const path = require('path') 
+require('dotenv').config()
+const express = require('express')
 const app = express() 
-   
-var PORT = process.env.port || 3000 
-  
-// View Engine Setup 
-app.set("views", path.join(__dirname)) 
-app.set("view engine", "ejs") 
-  
-// Body-parser middleware 
-app.use(bodyparser.urlencoded({extended:false})) 
-app.use(bodyparser.json()) 
-   
-app.get("/profile", function(req, res){ 
-    res.render("public/profile") 
-}); 
-   
-app.post('/profile', (req, res) => { 
-    console.log("Using Body-parser: ", req.body)
-    console.log("Fullname: ", req.body.fullname)
-    console.log("address: ", req.body.address1 + " " + req.body.address2)
-    console.log("city: ", req.body.city)
-    console.log("state: ", req.body.state)
-    console.log("zip: ", req.body.zip)
-    res.render("public/success", { fullname: req.body.fullname }) 
-}) 
-   
-app.listen(PORT, function(error){ 
-    if (error) throw error 
-    console.log("Server created Successfully on PORT", PORT) 
-}) 
+app.use(express.json())
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+
+const PORT = process.env.PORT
+
+app.use(express.static('./public'))
+app.get('/', (req, res) => {
+    res.redirect('login.html')
+})
+
+//Login Route
+const loginRoute = require('./routes/login')
+app.use('/login.html', loginRoute)
+
+//Register Route
+const registerRoute = require('./routes/register')
+app.use('/register.html', registerRoute)
+
+//Profile Management Route
+const profileRoute = require('./routes/profile')
+app.use('/profile.html', profileRoute)
+
+app.listen(PORT, () => console.log('Server Started on Port ' + PORT))
