@@ -25,8 +25,8 @@ app.use('/register.html', registerRoute)
 const profileRoute = require('./routes/profile')
 app.use('/profile.html', profileRoute)
 
-//Get quote
-const getquoteRoute = require('./routes/profile')
-app.use('/get_quote.html', getquoteRoute)
+//Get Quote Route
+const getQuoteRoute = require('./routes/get_quote')
+app.use('/get_quote.html', getQuoteRoute)
 
 app.listen(PORT, () => console.log('Server Started on Port ' + PORT))
