@@ -3,8 +3,8 @@ const router = express.Router()
 
 //ARRAY FOR TESTING WITHOUT DATABASE ONLY
 const userArray = [
-    { username: 'asd123', password: 'asdf1234' },
-    { username: '1a2s3d4f', password: '1a2s3d4f5g' }
+    { username: 'asd123', password: 'asdf1234', firstTime: false },
+    { username: '1a2s3d4f', password: '1a2s3d4f5g', firstTime: true }
 ]
 
 router.post('/', (req, res) => {
@@ -19,7 +19,12 @@ router.post('/', (req, res) => {
     try {
         if(userCheck.password == req.body.password) {
             console.log('Successful Login')
-            res.redirect('profile.html')
+
+            if(userCheck.firstTime == true) {
+                res.redirect('profile.html')
+            } else {
+                res.redirect('get_quote.html')
+            }
         } else {
             console.log('Failed Login')
             res.redirect('login.html')
