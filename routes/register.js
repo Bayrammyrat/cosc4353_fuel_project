@@ -4,7 +4,8 @@ const router = express.Router()
 //ARRAY FOR TESTING WITHOUT DATABASE ONLY
 const userArray = [{
     username: 'asd123',
-    password: 'asdf1234'
+    password: 'asdf1234',
+    firstTime: false
 }]
 
 router.post('/', (req, res) => {
@@ -18,7 +19,8 @@ router.post('/', (req, res) => {
     if (userCheck == null) {
         const user = {
             username: req.body.username,
-            password: req.body.password
+            password: req.body.password,
+            firstTime: true
         }
         userArray.push(user)
         console.log('New user created')
