@@ -8,7 +8,6 @@ router.post('/', (req, res) => {
     userArray = Object.assign(userArray, 
         {gallons : req.body.gallons}, 
         {date: req.body.date},
-        {state: req.body.state},
         {address1: req.body.address1}, 
         {address2: req.body.address2}, 
         {city: req.body.city}, 
@@ -18,7 +17,14 @@ router.post('/', (req, res) => {
     
     var gallons_input = req.body.gallons;
     var state_location = req.body.state;
-    var rate_History = true; 
+
+    //HARD CODE FOR TESTING
+    if(userArray.address1 == 'test address true') {
+        var rate_History = true; 
+    } else if (userArray.address1 == 'test address false') {
+        var rate_History = false; 
+    }
+
     var currentPrice = 1.5;
         if (gallons_input>1000 && state_location=="TX" && rate_History==true){
             console.log(price_per_gallons = currentPrice+ currentPrice*0.13);
