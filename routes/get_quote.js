@@ -3,7 +3,7 @@ const router = express.Router()
 
 //ARRAY FOR TESTING WITHOUT DATABASE ONLY
 var userArray =  { username: 'asd123', password: 'asdf1234' }
-
+var quoteArray =  { username: 'asd123', password: 'asdf1234' }
 
 router.post('/', (req, res) => {
     
@@ -41,5 +41,7 @@ router.get('/', (req, res) => {
     var name = 'hello';
     //res.render(__dirname + "/public/get_quote.html", {delivery_address:name});
     document.getElementById("delivery_address").value = name;
+    console.log(name);
 })
 module.exports = router
+
