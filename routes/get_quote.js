@@ -1,9 +1,16 @@
 const express = require('express')
 const router = express.Router()
 
+//ARRAY FOR TESTING WITHOUT DATABASE ONLY
+var userArray =  { username: 'asd123', password: 'asdf1234' }
+
 
 router.post('/', (req, res) => {
-    var gallons_input = gallons_input.req.body.gallons;
+    
+    userArray = Object.assign(userArray, {gallons : req.body.gallons}, 
+    {date: req.body.date})
+    console.log(userArray)
+   /*var gallons_input = gallons_input.req.body.gallons;
     var state_location = "TX";
     var rate_History = true; 
     var currentPrice = 1.5;
@@ -28,6 +35,11 @@ router.post('/', (req, res) => {
         }else {
             return price-per-gallons == currentPrice+ currentPrice*0.17;
         }
-    
+    */
+})
+router.get('/', (req, res) => {
+    var name = 'hello';
+    //res.render(__dirname + "/public/get_quote.html", {delivery_address:name});
+    document.getElementById("delivery_address").value = name;
 })
 module.exports = router
