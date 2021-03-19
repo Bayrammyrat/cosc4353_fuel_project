@@ -5,8 +5,15 @@ const router = express.Router()
 var userArray =  { username: 'asd123', password: 'asdf1234' }
 router.post('/', (req, res) => {
     
-    userArray = Object.assign(userArray, {gallons : req.body.gallons}, 
-    {date: req.body.date},{state: req.body.state})
+    userArray = Object.assign(userArray, 
+        {gallons : req.body.gallons}, 
+        {date: req.body.date},
+        {state: req.body.state},
+        {address1: req.body.address1}, 
+        {address2: req.body.address2}, 
+        {city: req.body.city}, 
+        {state: req.body.state}, 
+        {zip: req.body.zip})
     console.log(userArray)
     
     var gallons_input = req.body.gallons;
