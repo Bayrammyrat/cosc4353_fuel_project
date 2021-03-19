@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Registration</title>
+    </head>
+
+    <style>
+        form {
+            width: 250px;
+            padding: 75px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            border: solid #000000;
+            position: absolute;
+            text-align: center;
+        }
+
+        .input-wrapper {
+            display: inline-block;
+            text-align: left;
+        }
+
+        p {
+            font-size: 11px;
+            font-weight: bold;
+        }
+    </style>
+
+    <body>
+        <form method="POST">
+            <h1>Registration</h1>
+
+            <div class="input-wrapper">
+                <label>Username</label><br>
+                <input type="text" name="username" placeholder="Enter Username" pattern="[a-zA-Z0-9]{4,16}" required><br>
+                <p>
+                    • Only letters and numbers allowed<br>
+                    • Must be 4-16 characters long
+                </p><br>
+
+                <label>Password</label><br>
+                <input type="password" name="password" placeholder="Enter Password" pattern="[a-zA-Z0-9]{8,16}" required><br>
+
+                <p>
+                    • Only letters and numbers allowed<br>
+                    • Must be 8-16 characters long
+                </p>
+            </div><br><br>
+
+            <input type="submit" value="Register"><br><br>
+
+            Already have an account? <a href="login.html">Login</a>
+        </form>
+    </body>
+
+</html>

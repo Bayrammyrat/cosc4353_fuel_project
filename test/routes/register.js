@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-let alert = require('alert')
 
 //ARRAY FOR TESTING WITHOUT DATABASE ONLY
 const userArray = [{
@@ -30,7 +29,6 @@ router.post('/', (req, res) => {
         res.redirect('login.html')
     } else {
         console.log('The username ' + userCheck.username + ' is already in use')
-        alert('The username ' + userCheck.username + ' is already in use')
         res.redirect('register.html')
     }
 })
