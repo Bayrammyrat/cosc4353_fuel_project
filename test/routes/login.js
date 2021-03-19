@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+let alert = require('alert')
 
 //ARRAY FOR TESTING WITHOUT DATABASE ONLY
 const userArray = [
@@ -12,6 +13,7 @@ router.post('/', (req, res) => {
     const userCheck = userArray.find(index => index.username == req.body.username)
     if (userCheck == null) {
         console.log('User does not exist')
+        alert('User does not exist')
         res.redirect('login.html')
     }
 
@@ -27,6 +29,7 @@ router.post('/', (req, res) => {
             }
         } else {
             console.log('Failed Login')
+            alert('Failed Login')
             res.redirect('login.html')
         }
     } catch {
