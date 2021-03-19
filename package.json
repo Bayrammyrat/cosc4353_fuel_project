@@ -21,11 +21,7 @@
     "address-validator-net": "^2.0.9",
     "alert": "^5.0.10",
     "body-parser": "^1.19.0",
-<<<<<<< HEAD
-    "connect-flash": "^0.1.1",
-=======
     "ejs": "^3.1.6",
->>>>>>> 97c1d993eb10d1ea2fe5ea447cb961065b2cdaa2
     "express": "^4.17.1",
     "mongoose": "^5.12.0",
     "popups": "^1.1.3",
