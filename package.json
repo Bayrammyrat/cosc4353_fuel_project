@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "devStart": "nodemon server.js",
-    "test": "nyc --reporter=text mocha"
+    "test": "nyc --reporter=html mocha 'server.js' 'routes/**/*.js'"
   },
   "repository": {
     "type": "git",
