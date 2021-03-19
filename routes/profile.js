@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const USPS = require('usps-webtools');
+let alert = require('alert');  
 
 //ARRAY FOR TESTING WITHOUT DATABASE ONLY
 var userArray =  { username: 'asd123', password: 'asdf1234' }
@@ -34,10 +35,12 @@ router.post('/', (req, res) => {
               res.redirect("get_quote.html")
           }
           else{
+            alert("Invalid address!")
             res.redirect("profile.html")
           }
         }
         catch(err){
+          alert("Invalid address!")
           res.redirect("profile.html")
         }
         console.log(userArray)
