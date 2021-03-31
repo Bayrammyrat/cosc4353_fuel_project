@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const USPS = require('usps-webtools');
 let alert = require('alert');  
+//const mysqlConnection = require('./server.js');
 
 //ARRAY FOR TESTING WITHOUT DATABASE ONLY
 var userArray =  { username: 'asd123', password: 'asdf1234' }
