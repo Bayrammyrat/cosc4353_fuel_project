@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const USPS = require('usps-webtools');
 let alert = require('alert');  
-//const mysqlConnection = require('./server.js');
+const mysqlConnection = require("../utils/database");
 
 //ARRAY FOR TESTING WITHOUT DATABASE ONLY
 var userArray =  { username: 'asd123', password: 'asdf1234' }
@@ -14,12 +14,14 @@ const usps = new USPS({
 });
 
 router.post('/', (req, res) => {
+    var sql = "INSERT INTO ClientInformation (ID, VALUES ?";
     var fullname = req.body.fullname
     var address1 = req.body.address1
     var address2 = req.body.address2
     var city = req.body.city
     var state = req.body.state
-    var zip = req.body.zip
+    var zip = Number(req.body.zip)
+    var values = [1, fullname, address1, address2, city, state, zip]
 
     usps.verify({
         street1: address1,
@@ -30,9 +32,13 @@ router.post('/', (req, res) => {
       }, function(err, address) {
         try{
           if(address.footnotes=='N'){
-            userArray = Object.assign(userArray, {fullname : req.body.fullname}, 
-              {address1: req.body.address1}, {address2: req.body.address2}, 
-              {city: req.body.city}, {state: req.body.state}, {zip: req.body.zip})
+            mysqlConnection.query(sql, [values], function (err, result) {
+              if (!err) {
+                console.log("records inserted: " + result.affectedRows);
+              } else {
+                console.log(err);
+              }
+            })
               res.redirect("get_quote.html")
           }
           else{
@@ -47,6 +53,8 @@ router.post('/', (req, res) => {
         console.log(userArray)
         console.log(address)
       });
+
+    
 })
 
 
