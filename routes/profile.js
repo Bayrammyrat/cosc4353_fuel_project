@@ -14,7 +14,6 @@ const usps = new USPS({
 });
 
 router.post('/', (req, res) => {
-    var sql = "INSERT INTO ClientInformation (ID, VALUES ?";
     var fullname = req.body.fullname
     var address1 = req.body.address1
     var address2 = req.body.address2
@@ -22,6 +21,8 @@ router.post('/', (req, res) => {
     var state = req.body.state
     var zip = Number(req.body.zip)
     var values = [1, fullname, address1, address2, city, state, zip]
+
+    var sql = "INSERT INTO ClientInformation (`ID`, `username`, `address1`, `address2`, `city`, `state`, `zip`) VALUES ('" + 3 + "', '" + fullname + "', '" + address1 + "', '" + address2 + "', '" + city + "', '" + state + "', '" + zip + "');";
 
     usps.verify({
         street1: address1,
@@ -32,9 +33,9 @@ router.post('/', (req, res) => {
       }, function(err, address) {
         try{
           if(address.footnotes=='N'){
-            mysqlConnection.query(sql, [values], function (err, result) {
+            mysqlConnection.query(sql, function (err, result) {
               if (!err) {
-                console.log("records inserted: " + result.affectedRows);
+                console.log("records inserted: " );
               } else {
                 console.log(err);
               }
