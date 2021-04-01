@@ -4,6 +4,7 @@ const USPS = require('usps-webtools');
 let alert = require('alert');  
 const mysqlConnection = require("../utils/database");
 
+
 //ARRAY FOR TESTING WITHOUT DATABASE ONLY
 var userArray =  { username: 'asd123', password: 'asdf1234' }
 
@@ -14,6 +15,7 @@ const usps = new USPS({
 });
 
 router.post('/', (req, res) => {
+    console.log("user id in profile: " + req.path + req.query + req.params)
     var fullname = req.body.fullname
     var address1 = req.body.address1
     var address2 = req.body.address2
@@ -22,7 +24,7 @@ router.post('/', (req, res) => {
     var zip = Number(req.body.zip)
     var values = [1, fullname, address1, address2, city, state, zip]
 
-    var sql = "INSERT INTO ClientInformation (`ID`, `username`, `address1`, `address2`, `city`, `state`, `zip`) VALUES ('" + 3 + "', '" + fullname + "', '" + address1 + "', '" + address2 + "', '" + city + "', '" + state + "', '" + zip + "');";
+    var sql = "INSERT INTO ClientInformation (`id`, `fullname`, `address1`, `address2`, `city`, `state`, `zip`) VALUES ('" + 3 + "', '" + fullname + "', '" + address1 + "', '" + address2 + "', '" + city + "', '" + state + "', '" + zip + "');";
 
     usps.verify({
         street1: address1,
@@ -32,7 +34,7 @@ router.post('/', (req, res) => {
         zip: zip
       }, function(err, address) {
         try{
-          if(address.footnotes=='N'){
+          if(address.footnotes=='N' || address.footnotes==''){
             mysqlConnection.query(sql, function (err, result) {
               if (!err) {
                 console.log("records inserted: " );
@@ -51,7 +53,6 @@ router.post('/', (req, res) => {
           alert("Invalid address!")
           res.redirect("profile.html")
         }
-        console.log(userArray)
         console.log(address)
       });
 
