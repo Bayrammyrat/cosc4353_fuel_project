@@ -15,9 +15,10 @@ router.post('/', async (req, res) => {
             //If result length is bigger than 0 then the user exists in the database
             if(result.length > 0) {
                 validUsername = true
+                userID = result[0].id
                 userPassword = result[0].password
-                user_id = result[0].id
                 console.log(result)
+
                 res(result)
             } else {
                 validUsername = false
@@ -33,9 +34,9 @@ router.post('/', async (req, res) => {
         const validPassword = await bcrypt.compare(req.body.password, userPassword)
         if (validPassword) {
             console.log('Successful Login')
-            //req.session.user_id = userId;
-            console.log("id: " + user_id)
-            res.redirect(`profile.html?user_id=${user_id}`)
+            console.log("ID: " + userID)
+
+            res.redirect(`profile.html?user_id=${userID}`)
         } else {
             console.log('Failed Login')
             alert('Failed Login')
