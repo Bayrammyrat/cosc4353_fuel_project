@@ -1,36 +1,57 @@
 const express = require('express')
 const router = express.Router()
 let alert = require('alert')
+const bcrypt = require('bcrypt')
+const mysqlConnection = require("../utils/database")
 
-//ARRAY FOR TESTING WITHOUT DATABASE ONLY
-const userArray = [{
-    username: 'asd123',
-    password: 'asdf1234',
-    firstTime: false
-}]
 
-router.post('/', (req, res) => {
-    //console.log('Trying to create new user...')
+router.post('/', async (req, res) => {
 
-    //console.log('Username: ' + req.body.username)
-    //console.log('Password: ' + req.body.password)
+    //Check if user already exists in the database
+    await new Promise((res, rej) => {
+        var sql = "SELECT * FROM usercredentials WHERE username = ?"
+        mysqlConnection.query(sql, req.body.username, (err, result) => {
+            if(err) throw err
+            
+            //If result length is bigger than 0 then the user already exists in the database
+            if(result.length > 0) {
+                newUser = false
+                console.log(result)
 
-    //Find if username already exists and adds user if username does not exist
-    const userCheck = userArray.find(index => index.username == req.body.username)
-    if (userCheck == null) {
-        const user = {
+                res(result)
+            } else {
+                newUser = true
+                console.log(result)
+
+                res(result)
+            }
+        })
+    })
+
+    //If user does not exist then add user to database
+    if (newUser == true) {
+
+        //Encrypt password
+        const salt = await bcrypt.genSalt(10)
+        req.body.password = await bcrypt.hash(req.body.password, salt)
+
+        var sql = 'INSERT INTO usercredentials SET ?'
+        var post = {
             username: req.body.username,
-            password: req.body.password,
-            firstTime: true
+            password: req.body.password
         }
-        userArray.push(user)
-        console.log('New user created')
-        console.log(userArray)
+        mysqlConnection.query(sql, post, (err, result) => {
+            if(err) throw err
+
+            console.log('New user created')
+            console.log(result)
+        })
 
         res.redirect('login.html')
     } else {
-        console.log('The username ' + userCheck.username + ' is already in use')
-        alert('The username ' + userCheck.username + ' is already in use')
+        console.log('The username ' + req.body.username + ' is already in use')
+        alert('The username ' + req.body.username + ' is already in use')
+
         res.redirect('register.html')
     }
 })

@@ -1,39 +1,51 @@
 const express = require('express')
 const router = express.Router()
 let alert = require('alert')
+const bcrypt = require('bcrypt')
+const mysqlConnection = require("../utils/database")
 
-//ARRAY FOR TESTING WITHOUT DATABASE ONLY
-const userArray = [
-    { username: 'asd123', password: 'asdf1234', firstTime: false },
-    { username: '1a2s3d4f', password: '1a2s3d4f5g', firstTime: true }
-]
+router.post('/', async (req, res) => {
 
-router.post('/', (req, res) => {
-    //Check if user exists
-    const userCheck = userArray.find(index => index.username == req.body.username)
-    if (userCheck == null) {
-        console.log('User does not exist')
-        alert('User does not exist')
-        res.redirect('login.html')
-    }
+    //Check if user exists in the database
+    await new Promise((res, rej) => {
+        var sql = "SELECT * FROM usercredentials WHERE username = ?"
+        mysqlConnection.query(sql, req.body.username, (err, result) => {
+            if(err) throw err
+            
+            //If result length is bigger than 0 then the user exists in the database
+            if(result.length > 0) {
+                validUsername = true
+                userPassword = result[0].password
+                console.log(result)
 
-    //If username exists, check if password matches
-    try {
-        if(userCheck.password == req.body.password) {
+                res(result)
+            } else {
+                validUsername = false
+                console.log(result)
+
+                res(result)
+            }
+        })
+    })
+
+    //If username is valid then check if password is correct
+    if (validUsername == true) {
+        const validPassword = await bcrypt.compare(req.body.password, userPassword)
+        if (validPassword) {
             console.log('Successful Login')
 
-            if(userCheck.firstTime == true) {
-                res.redirect('profile.html')
-            } else {
-                res.redirect('get_quote.html')
-            }
+            res.redirect('profile.html')
         } else {
             console.log('Failed Login')
             alert('Failed Login')
+
             res.redirect('login.html')
         }
-    } catch {
-        res.status(500).send()
+    } else {
+        console.log('User does not exist')
+        alert('User does not exist')
+
+        res.redirect('login.html')
     }
 })
 
