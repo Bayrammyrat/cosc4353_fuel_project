@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
             console.log('Successful Login')
             console.log("ID: " + userID)
 
-            res.redirect(`profile.html?user_id=${userID}`)
+            res.redirect(`profile.html/${userID}`)
         } else {
             console.log('Failed Login')
             alert('Failed Login')

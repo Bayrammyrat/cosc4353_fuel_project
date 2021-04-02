@@ -4,15 +4,19 @@ const USPS = require('usps-webtools');
 let alert = require('alert');  
 const mysqlConnection = require("../utils/database");
 
-
-//ARRAY FOR TESTING WITHOUT DATABASE ONLY
-var userArray =  { username: 'asd123', password: 'asdf1234' }
+userID = 0
 
 const usps = new USPS({
   server: 'http://production.shippingapis.com/ShippingAPI.dll',
   userId: '767SALYR7333',
   ttl: 10000 //TTL in milliseconds for request
 });
+
+//Get ID of user
+router.get('/:id', (req, res) => {
+  userID = req.params.id
+  res.redirect('/profile.html')
+})
 
 router.post('/', (req, res) => {
     console.log("user id in profile: " + req.path + req.query + req.params)
