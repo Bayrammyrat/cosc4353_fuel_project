@@ -26,8 +26,6 @@ router.post('/', (req, res) => {
     var state = req.body.state
     var zip = Number(req.body.zip)
 
-    var sql = "INSERT INTO clientinformation (`id`, `fullname`, `address1`, `address2`, `city`, `state`, `zip`) VALUES ('" + userID + "', '" + fullname + "', '" + address1 + "', '" + address2 + "', '" + city + "', '" + state + "', '" + zip + "');";
-
     usps.verify({
         street1: address1,
         street2: address2,
@@ -37,9 +35,10 @@ router.post('/', (req, res) => {
       }, function(err, address) {
         try{
           if(address.footnotes=='N' || address.footnotes==''){
+            var sql = "INSERT INTO clientinformation (`id`, `fullname`, `address1`, `address2`, `city`, `state`, `zip`) VALUES ('" + userID + "', '" + fullname + "', '" + address1 + "', '" + address2 + "', '" + city + "', '" + state + "', '" + zip + "');";
             mysqlConnection.query(sql, function (err, result) {
               if (!err) {
-                console.log("records inserted: " );
+                console.log("records inserted at id: " + userID);
               } else {
                 console.log(err);
               }
