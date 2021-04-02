@@ -39,8 +39,6 @@ router.post('/', (req, res) => {
             mysqlConnection.query(sql, function (err, result) {
               if (!err) {
                 console.log("records inserted at id: " + userID);
-              } else {
-                console.log(err);
               }
             })
               res.redirect("get_quote.html")

@@ -11,8 +11,6 @@ router.post('/', async (req, res) => {
     await new Promise((res, rej) => {
         var sql = "SELECT * FROM usercredentials WHERE username = ?"
         mysqlConnection.query(sql, req.body.username, (err, result) => {
-            if(err) throw err
-            
             //If result length is bigger than 0 then the user already exists in the database
             if(result.length > 0) {
                 newUser = false
@@ -41,8 +39,6 @@ router.post('/', async (req, res) => {
             password: req.body.password
         }
         mysqlConnection.query(sql, post, (err, result) => {
-            if(err) throw err
-
             console.log('New user created')
             console.log(result)
         })

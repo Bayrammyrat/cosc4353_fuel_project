@@ -10,7 +10,6 @@ router.post('/', async (req, res) => {
         //Check if user exists in the database
         var sql = "SELECT * FROM usercredentials WHERE username = ?"
         mysqlConnection.query(sql, req.body.username, (err, result) => {
-            if(err) throw err
             
             //If result length is bigger than 0 then the user exists in the database
             if(result.length > 0) {
@@ -31,7 +30,6 @@ router.post('/', async (req, res) => {
         //Check if user already has a profile
         var sql = "SELECT * FROM clientinformation WHERE id = ?"
         mysqlConnection.query(sql, userID, (err, result) => {
-            if(err) throw err
 
             //If result length is bigger than 0 then the user already has a profile
             if(result.length > 0) {
