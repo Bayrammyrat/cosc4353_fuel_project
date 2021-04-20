@@ -4,12 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <title>Fuel quote form</title>
+
+  <script>
+    function loadData() {
+      document.getElementById("testType").value = "THIS IS A TEST"
+    }
+  </script>
 </head>
 
-<body>
+<body onload="loadData()">
   <main id="main-holder">
     <h1 id="fuel-quote">Fuel quote form</h1>
-</body>
+
+    <input type="text" id="testType" readonly>
+
     <form method="POST">
       <br>
       <label for="gallons"> Gallons Requested</label>

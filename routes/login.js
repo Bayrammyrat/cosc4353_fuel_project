@@ -26,7 +26,10 @@ router.post('/', async (req, res) => {
                 res(result)
             }
         })
+    })
 
+
+    await new Promise((res, rej) => {
         //Check if user already has a profile
         var sql = "SELECT * FROM clientinformation WHERE id = ?"
         mysqlConnection.query(sql, userID, (err, result) => {
@@ -34,9 +37,15 @@ router.post('/', async (req, res) => {
             //If result length is bigger than 0 then the user already has a profile
             if(result.length > 0) {
                 firstTime = false
+
+                res(result)
             } else {
                 firstTime = true
+
+                res(result)
             }
+
+            console.log("firstTime for userID " + userID + ": " + firstTime)
         })
     })
 
