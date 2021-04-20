@@ -3,6 +3,11 @@ const router = express.Router()
 
 //ARRAY FOR TESTING WITHOUT DATABASE ONLY
 var userArray =  { username: 'asd123', password: 'asdf1234' }
+
+router.get('/', (req, res) =>{
+    res.render('get_quote');
+})
+
 router.post('/', (req, res) => {
     
     userArray = Object.assign(userArray, 

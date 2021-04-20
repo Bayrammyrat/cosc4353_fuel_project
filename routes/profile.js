@@ -15,7 +15,7 @@ const usps = new USPS({
 //Get ID of user
 router.get('/:id', (req, res) => {
   userID = req.params.id
-  res.redirect('/profile.html')
+  res.render('profile')
 })
 
 router.post('/', (req, res) => {

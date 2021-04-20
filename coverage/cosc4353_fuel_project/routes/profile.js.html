@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">32.26% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>31/31</span>
+                <span class='fraction'>10/31</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/6</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">32.26% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>31/31</span>
+                <span class='fraction'>10/31</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -134,45 +134,45 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -194,46 +194,46 @@ const usps = new USPS({
 });
 &nbsp;
 //Get ID of user
-router.get('/:id', (req, res) =&gt; {
-  userID = req.params.id
-  res.redirect('/profile.html')
+router.get('/:id', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >  userID = req.params.id</span>
+<span class="cstat-no" title="statement not covered" >  res.redirect('/profile.html')</span>
 })
 &nbsp;
-router.post('/', (req, res) =&gt; {
-    var fullname = req.body.fullname
-    var address1 = req.body.address1
-    var address2 = req.body.address2
-    var city = req.body.city
-    var state = req.body.state
-    var zip = Number(req.body.zip)
+router.post('/', <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
+    var fullname = <span class="cstat-no" title="statement not covered" >req.body.fullname</span>
+    var address1 = <span class="cstat-no" title="statement not covered" >req.body.address1</span>
+    var address2 = <span class="cstat-no" title="statement not covered" >req.body.address2</span>
+    var city = <span class="cstat-no" title="statement not covered" >req.body.city</span>
+    var state = <span class="cstat-no" title="statement not covered" >req.body.state</span>
+    var zip = <span class="cstat-no" title="statement not covered" >Number(req.body.zip)</span>
 &nbsp;
-    usps.verify({
+<span class="cstat-no" title="statement not covered" >    usps.verify({</span>
         street1: address1,
         street2: address2,
         city: city,
         state: state,
         zip: zip
-      }, function(err, address) {
-        try{
-          if(address.footnotes=='N' || address.footnotes==''){
-            var sql = "INSERT INTO clientinformation (`id`, `fullname`, `address1`, `address2`, `city`, `state`, `zip`) VALUES ('" + userID + "', '" + fullname + "', '" + address1 + "', '" + address2 + "', '" + city + "', '" + state + "', '" + zip + "');";
-            mysqlConnection.query(sql, function (err, result) {
-              <span class="missing-if-branch" title="else path not taken" >E</span>if (!err) {
-                console.log("records inserted at id: " + userID);
+      }, <span class="fstat-no" title="function not covered" >fu</span>nction(err, address) {
+<span class="cstat-no" title="statement not covered" >        try{</span>
+<span class="cstat-no" title="statement not covered" >          if(address.footnotes=='N' || address.footnotes==''){</span>
+            var sql = <span class="cstat-no" title="statement not covered" >"INSERT INTO clientinformation (`id`, `fullname`, `address1`, `address2`, `city`, `state`, `zip`) VALUES ('" + userID + "', '" + fullname + "', '" + address1 + "', '" + address2 + "', '" + city + "', '" + state + "', '" + zip + "');";</span>
+<span class="cstat-no" title="statement not covered" >            mysqlConnection.query(sql, <span class="fstat-no" title="function not covered" >fu</span>nction (err, result) {</span>
+<span class="cstat-no" title="statement not covered" >              if (!err) {</span>
+<span class="cstat-no" title="statement not covered" >                console.log("records inserted at id: " + userID);</span>
               }
             })
-              res.redirect("get_quote.html")
+<span class="cstat-no" title="statement not covered" >              res.redirect("get_quote.html")</span>
           }
           else{
-            alert("Invalid address!")
-            res.redirect("profile.html")
+<span class="cstat-no" title="statement not covered" >            alert("Invalid address!")</span>
+<span class="cstat-no" title="statement not covered" >            res.redirect("profile.html")</span>
           }
         }
         catch(err){
-          alert("Invalid address!")
-          res.redirect("profile.html")
+<span class="cstat-no" title="statement not covered" >          alert("Invalid address!")</span>
+<span class="cstat-no" title="statement not covered" >          res.redirect("profile.html")</span>
         }
-        console.log(address)
+<span class="cstat-no" title="statement not covered" >        console.log(address)</span>
       });
 &nbsp;
     
@@ -247,7 +247,7 @@ module.exports = router</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Apr 20 2021 16:24:21 GMT-0500 (Central Daylight Time)
+                at Tue Apr 20 2021 16:48:01 GMT-0500 (Central Daylight Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>
