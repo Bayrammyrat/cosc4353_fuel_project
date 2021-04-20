@@ -62,21 +62,21 @@ router.post('/', async (req, res) => {
 
             //If the user is a first time user then send them to fill out profile
             if(firstTime == true) {
-                res.redirect(`profile.html/${userID}`)
+                res.render(`profile/${userID}`)
             } else {
-                res.redirect('get_quote.html')
+                res.render('get_quote')
             }
         } else {
             console.log('Failed Login')
             alert('Failed Login')
 
-            res.redirect('login.html')
+            res.render('login')
         }
     } else {
         console.log('User does not exist')
         alert('User does not exist')
 
-        res.redirect('login.html')
+        res.render('login')
     }
 })
 

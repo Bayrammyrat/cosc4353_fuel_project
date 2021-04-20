@@ -47,12 +47,12 @@ router.post('/', async (req, res) => {
             console.log(result)
         })
 
-        res.redirect('login')
+        res.render('login')
     } else {
         console.log('The username ' + req.body.username + ' is already in use')
         alert('The username ' + req.body.username + ' is already in use')
 
-        res.redirect('register')
+        res.render('register')
     }
 })
 

@@ -41,16 +41,16 @@ router.post('/', (req, res) => {
                 console.log("records inserted at id: " + userID);
               }
             })
-              res.redirect("get_quote.html")
+              res.render("get_quote")
           }
           else{
             alert("Invalid address!")
-            res.redirect("profile.html")
+            res.render("profile")
           }
         }
         catch(err){
           alert("Invalid address!")
-          res.redirect("profile.html")
+          res.render("profile")
         }
         console.log(address)
       });
