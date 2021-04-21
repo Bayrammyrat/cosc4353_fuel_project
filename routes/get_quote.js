@@ -2,9 +2,6 @@ const express = require('express')
 const router = express.Router()
 const mysqlConnection = require("../utils/database")
 
-//ARRAY FOR TESTING WITHOUT DATABASE ONLY
-var userArray =  { username: 'asd123', password: 'asdf1234' }
-
 userID = 0
 
 //Get ID of user
@@ -30,61 +27,100 @@ router.get('/:id', async (req, res) => {
         userAddr2: userAddr2,
         userCity: userCity,
         userState: userState,
-        userZip: userZip
+        userZip: userZip,
+        userPricePG: "",
+        userTotal: "",
+        userGallonsReq: "",
+        userDateReq: ""
     })
 })
 
-router.post('/:id', (req, res) => {
+router.post('/:id', async (req, res) => {
+    /*
+    Create a pricing module that should calculate the price per gallon based on this formula.
 
-    console.log("TEST: " + userID)
-    
-    userArray = Object.assign(userArray, 
-        {gallons : req.body.gallons}, 
-        {date: req.body.date},
-        {address1: req.body.address1}, 
-        {address2: req.body.address2}, 
-        {city: req.body.city}, 
-        {state: req.body.state}, 
-        {zip: req.body.zip})
-    console.log(userArray)
-    
-    var gallons_input = req.body.gallons;
-    var state_location = req.body.state;
+Suggested Price = Current Price + Margin
 
-    //HARD CODE FOR TESTING
-    if(userArray.address1 == 'test address true') {
-        var rate_History = true; 
-    } else if (userArray.address1 == 'test address false') {
-        var rate_History = false; 
+Where,
+
+Current price per gallon = $1.50 (this is the price what distributor gets from refinery and it varies based upon crude price. But we are keeping it constant for simplicity)
+Margin =  Current Price * (Location Factor - Rate History Factor + Gallons Requested Factor + Company Profit Factor)
+
+Consider these factors:
+Location Factor = 2% for Texas, 4% for out of state.
+Rate History Factor = 1% if client requested fuel before, 0% if no history (you can query fuel quote table to check if there are any rows for the client)
+Gallons Requested Factor = 2% if more than 1000 Gallons, 3% if less
+Company Profit Factor = 10% always
+
+Example:
+1500 gallons requested, in state, does have history (i.e. quote history data exist in DB for this client)
+
+Margin => (.02 - .01 + .02 + .1) * 1.50 = .195
+Suggested Price/gallon => 1.50 + .195 = $1.695
+Total Amount Due => 1500 * 1.695 = $2542.50
+    */
+    await new Promise((res, rej) => {
+        var sql = "SELECT * FROM fuelquote WHERE id = ?"
+        mysqlConnection.query(sql, userID, (err, result) => {
+            //If result length is bigger than 0 then the user already has fuel quote history
+            if(result.length > 0) {
+                newUser = false
+                console.log(result)
+
+                res(result)
+            } else {
+                newUser = true
+                console.log(result)
+
+                res(result)
+            }
+        })
+    })
+
+    currentPrice = 1.50
+    companyProfitF = 0.10
+
+    location = req.body.state
+    gallons = req.body.gallons
+    date = req.body.date
+
+    //Location Factor
+    if(location == 'TX') {
+        locationF = 0.02
+    } else {
+        locationF = 0.04
     }
 
-    var currentPrice = 1.5;
-        if (gallons_input>1000 && state_location=="TX" && rate_History==true){
-            console.log(price_per_gallons = currentPrice+ currentPrice*0.13);
-            console.log(total_price =price_per_gallons*gallons_input);
-        }else if (gallons_input>1000 && state_location=="TX"){
-            console.log(price_per_gallons = currentPrice+ currentPrice*0.14);
-            console.log(total_price =price_per_gallons*gallons_input);
-        }else if (gallons_input>1000 && rate_History==true){
-            console.log(price_per_gallons = currentPrice+ currentPrice*0.15);
-            console.log(total_price =price_per_gallons*gallons_input);
-        }else if (state_location=="TX" && rate_History==true){
-            console.log(price_per_gallons = currentPrice+ currentPrice*0.14);
-            console.log(total_price =price_per_gallons*gallons_input);
-        }else if (gallons_input>1000){
-            console.log(price_per_gallons = currentPrice+ currentPrice*0.16);
-            console.log(total_price =price_per_gallons*gallons_input);
-        }else if (state_location=="TX"){
-            console.log(price_per_gallons = currentPrice+ currentPrice*0.15);
-            console.log(total_price =price_per_gallons*gallons_input);
-        }else if (rate_History=true){
-            console.log(price_per_gallons = currentPrice+ currentPrice*0.16);
-            console.log(total_price =price_per_gallons*gallons_input);
-        }else {
-            console.log(price_per_gallons = currentPrice+ currentPrice*0.17);
-            console.log(total_price =price_per_gallons*gallons_input);
-        }
-    
+    //Rate History Factor
+    if(newUser == false) {
+        rateHistoryF = 0.01
+    } else {
+        rateHistoryF = 0
+    }
+
+    //Gallons Requested Factor
+    if(gallons >= 1000) {
+        gallonsF = 0.02
+    } else {
+        gallonsF = 0.03
+    }
+
+    margin = currentPrice * (locationF - rateHistoryF + gallonsF + companyProfitF)
+
+    suggestedPrice = currentPrice + margin
+    totalAmount = gallons * suggestedPrice
+
+    res.render('get_quote', {
+        userAddr1: userAddr1,
+        userAddr2: userAddr2,
+        userCity: userCity,
+        userState: userState,
+        userZip: userZip,
+        userPricePG: suggestedPrice,
+        userTotal: totalAmount,
+        userGallonsReq: gallons,
+        userDateReq: date
+    })
 })
 
 module.exports = router
