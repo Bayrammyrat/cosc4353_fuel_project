@@ -25,6 +25,19 @@
       margin: 0;
     }
   </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $(function() {  
+        var date = new Date().toISOString().slice(0,10);
+
+        $('#date').attr('min', date);
+      })
+    })
+  </script>
+
 </head>
 
 <body>
