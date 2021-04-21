@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 const mysqlConnection = require("../utils/database")
 
 router.get('/', (req, res) =>{
-    res.render('login');
+    res.render('login')
 })
 
 router.post('/', async (req, res) => {
@@ -62,21 +62,21 @@ router.post('/', async (req, res) => {
 
             //If the user is a first time user then send them to fill out profile
             if(firstTime == true) {
-                res.render(`profile/${userID}`)
+                res.redirect(`profile/${userID}`)
             } else {
-                res.render('get_quote')
+                res.redirect(`get_quote/${userID}`)
             }
         } else {
             console.log('Failed Login')
             alert('Failed Login')
 
-            res.render('login')
+            res.redirect('login')
         }
     } else {
         console.log('User does not exist')
         alert('User does not exist')
 
-        res.render('login')
+        res.redirect('login')
     }
 })
 

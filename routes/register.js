@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 const mysqlConnection = require("../utils/database")
 
 router.get('/', (req, res) =>{
-    res.render('register');
+    res.render('register')
 })
 
 router.post('/', async (req, res) => {
@@ -47,12 +47,12 @@ router.post('/', async (req, res) => {
             console.log(result)
         })
 
-        res.render('login')
+        res.redirect('login')
     } else {
         console.log('The username ' + req.body.username + ' is already in use')
         alert('The username ' + req.body.username + ' is already in use')
 
-        res.render('register')
+        res.redirect('register')
     }
 })
 

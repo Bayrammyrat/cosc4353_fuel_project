@@ -1,14 +1,42 @@
 const express = require('express')
 const router = express.Router()
+const mysqlConnection = require("../utils/database")
 
 //ARRAY FOR TESTING WITHOUT DATABASE ONLY
 var userArray =  { username: 'asd123', password: 'asdf1234' }
 
-router.get('/', (req, res) =>{
-    res.render('get_quote');
+userID = 0
+
+//Get ID of user
+router.get('/:id', async (req, res) => {
+    userID = req.params.id
+
+    await new Promise((res, rej) => {
+        //Grab client information
+        var sql = "SELECT * FROM clientinformation WHERE id = ?"
+        mysqlConnection.query(sql, userID, (err, result) => {
+            userAddr1 = result[0].address1
+            userAddr2 = result[0].address2
+            userCity = result[0].city
+            userState = result[0].state
+            userZip = result[0].zip
+            
+            res(result)
+        })
+    })
+
+    res.render('get_quote', {
+        userAddr1: userAddr1,
+        userAddr2: userAddr2,
+        userCity: userCity,
+        userState: userState,
+        userZip: userZip
+    })
 })
 
-router.post('/', (req, res) => {
+router.post('/:id', (req, res) => {
+
+    console.log("TEST: " + userID)
     
     userArray = Object.assign(userArray, 
         {gallons : req.body.gallons}, 

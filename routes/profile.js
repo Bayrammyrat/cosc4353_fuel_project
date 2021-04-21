@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => {
   res.render('profile')
 })
 
-router.post('/', (req, res) => {
+router.post('/:id', (req, res) => {
     var fullname = req.body.fullname
     var address1 = req.body.address1
     var address2 = req.body.address2
@@ -41,16 +41,16 @@ router.post('/', (req, res) => {
                 console.log("records inserted at id: " + userID);
               }
             })
-              res.render("get_quote")
+              res.redirect(`/get_quote/${userID}`)
           }
           else{
             alert("Invalid address!")
-            res.render("profile")
+            res.redirect(`/profile/${userID}`)
           }
         }
         catch(err){
           alert("Invalid address!")
-          res.render("profile")
+          res.redirect(`/profile/${userID}`)
         }
         console.log(address)
       });
