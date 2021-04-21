@@ -4,6 +4,27 @@
 <head>
   <meta charset="UTF-8">
   <title>Fuel Quote Form</title>
+
+  <style>
+    h1{
+      width: 20%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      outline: none;
+    }
+    input, select{
+      width: 20%;
+      padding: 5px 10px;
+      box-sizing: border-box;
+      border: 1px solid #555;
+      outline: none;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  </style>
 </head>
 
 <body>
@@ -13,55 +34,77 @@
     <form method="POST">
       <br>
       <label for="gallons"> Gallons Requested</label>
+      <br>
       <input type="number" id="gallons" name="gallons" maxlength = "50" required>
       </br>
       <br> 
       <label for="date">Date</label>
+      <br>
       <input type="date" id="date" name="date" required>
       </br>
 
       <br>
       <label for="adr1"> Address 1</label>
+      <br>
       <input type="text" id="adr1" name="address1" value="<%=userAddr1%>" readonly>
       </br>
       <br>
       <label for="adr2"> Address 2</label>
+      <br>
       <input type="text" id="adr2" name="address2" value="<%=userAddr2%>" readonly>
       </br>
       <br>
       <label for="city"> City</label>
+      <br>
       <input type="text" id="city" name="city" value="<%=userCity%>" readonly>
       </br>
       <br>
       <label for="state"> State</label>
+      <br>
       <input type="text" id="state" name="state" value="<%=userState%>" readonly>
       </br>
       <br>
       <label for="zip"> Zip Code</label>
+      <br>
       <input type="number" id="zip" name="zip" value="<%=userZip%>" readonly>
       </br>
 
       <br>
-      <input type="submit" value="Get Quote">   
+      <input type="submit" name="btnClick" value="Get Quote">   
       </br>
+      </form>
 
+      <form method="POST">
       <br>
       <label for="gallons2"> Gallons Suggested</label>
+      <br>
       <input type="number" id="gallons2" name="gallons2" value="<%=userGallonsReq%>" readonly>
       </br>
       <br> 
       <label for="date2">Date Suggested</label>
+      <br>
       <input type="text" id="date2" name="date2" value="<%=userDateReq%>" readonly>
       </br>
       <br>
       <label for="price_per_gallons">Suggested Price / Gallon</label>
+      <br>
       <input type="number" id="price_per_gallons" name="price_per_gallon" value="<%=userPricePG%>" readonly>
       </br>
       <br>
       <label for="total_due">Total Amount Due</label>
+      <br>
       <input type="number" id="total_due" name="total_due" value="<%=userTotal%>" readonly>
       <br>
-    </form>
+
+      <br>
+      <input type="submit" name="btnClick" value="Submit Quote">   
+      </br>
+      </form>
+
+      <form method="POST">
+        <br>
+        <input type="submit" name="btnClick" value="Fuel Quote History">
+     </form>
 
   
   </main>

@@ -36,41 +36,18 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/:id', async (req, res) => {
-    /*
-    Create a pricing module that should calculate the price per gallon based on this formula.
-
-Suggested Price = Current Price + Margin
-
-Where,
-
-Current price per gallon = $1.50 (this is the price what distributor gets from refinery and it varies based upon crude price. But we are keeping it constant for simplicity)
-Margin =  Current Price * (Location Factor - Rate History Factor + Gallons Requested Factor + Company Profit Factor)
-
-Consider these factors:
-Location Factor = 2% for Texas, 4% for out of state.
-Rate History Factor = 1% if client requested fuel before, 0% if no history (you can query fuel quote table to check if there are any rows for the client)
-Gallons Requested Factor = 2% if more than 1000 Gallons, 3% if less
-Company Profit Factor = 10% always
-
-Example:
-1500 gallons requested, in state, does have history (i.e. quote history data exist in DB for this client)
-
-Margin => (.02 - .01 + .02 + .1) * 1.50 = .195
-Suggested Price/gallon => 1.50 + .195 = $1.695
-Total Amount Due => 1500 * 1.695 = $2542.50
-    */
     await new Promise((res, rej) => {
         var sql = "SELECT * FROM fuelquote WHERE id = ?"
         mysqlConnection.query(sql, userID, (err, result) => {
             //If result length is bigger than 0 then the user already has fuel quote history
             if(result.length > 0) {
                 newUser = false
-                console.log(result)
+                //console.log(result)
 
                 res(result)
             } else {
                 newUser = true
-                console.log(result)
+                //console.log(result)
 
                 res(result)
             }
@@ -110,17 +87,65 @@ Total Amount Due => 1500 * 1.695 = $2542.50
     suggestedPrice = currentPrice + margin
     totalAmount = gallons * suggestedPrice
 
-    res.render('get_quote', {
-        userAddr1: userAddr1,
-        userAddr2: userAddr2,
-        userCity: userCity,
-        userState: userState,
-        userZip: userZip,
-        userPricePG: suggestedPrice,
-        userTotal: totalAmount,
-        userGallonsReq: gallons,
-        userDateReq: date
-    })
+    if(req.body.btnClick == "Fuel Quote History") {
+        console.log("Fuel Quote History Button Clicked")
+        res.redirect(`/quote_history/${userID}`)
+    }
+
+    if(req.body.btnClick == "Get Quote") {
+        console.log("Get Quote Button Clicked")
+        res.render('get_quote', {
+            userAddr1: userAddr1,
+            userAddr2: userAddr2,
+            userCity: userCity,
+            userState: userState,
+            userZip: userZip,
+            userPricePG: suggestedPrice,
+            userTotal: totalAmount,
+            userGallonsReq: gallons,
+            userDateReq: date
+        })
+    }
+
+    if(req.body.btnClick == "Submit Quote" && req.body.total_due == "") {
+        res.render('get_quote', {
+            userAddr1: userAddr1,
+            userAddr2: userAddr2,
+            userCity: userCity,
+            userState: userState,
+            userZip: userZip,
+            userPricePG: "",
+            userTotal: "",
+            userGallonsReq: "",
+            userDateReq: ""
+        })
+    }
+
+    if(req.body.btnClick == "Submit Quote" && req.body.total_due != "") {
+        console.log("Submit Quote Button Clicked")
+
+        if(userAddr2 != "") {
+            fullAddress = userAddr1 + " " + userAddr2 + ", " + userCity + ", " + userState + " " + userZip
+        } else {
+            fullAddress = userAddr1 + ", " + userCity + ", " + userState + " " + userZip
+        }
+
+        var sql = 'INSERT INTO fuelquote SET ?'
+        var post = {
+            id: userID,
+            gallons: req.body.gallons2,
+            address: fullAddress,
+            date: req.body.date2,
+            price: req.body.price_per_gallon,
+            total: req.body.total_due
+        }
+        mysqlConnection.query(sql, post, (err, result) => {
+            console.log(result)
+        })
+
+        res.redirect(`/quote_history/${userID}`)
+    }
+    
 })
 
 module.exports = router

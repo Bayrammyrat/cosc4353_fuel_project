@@ -10,6 +10,10 @@
             text-align: center;
         }
 
+        form {
+            text-align: center;
+        }
+
         table {
             width: 95%;
             margin-left: auto;
@@ -50,38 +54,34 @@
             </tr>
 
             <tr>
-                <td>Gallons Requested Value</td>
-                <td>Delivery Address Value Delivery Address Value Delivery Address Value Delivery Address Value</td>
-                <td>Delivery Date Value</td>
-                <td>Suggested Price / Gallon Value</td>
-                <td>Total Amount Due Value</td>
+                <% for(var i = 0; i < userHist.length; i++) { %>
+                <tr>
+                    <td>
+                        <%= userHist[i].gallons %>
+                    </td>
+                    <td>
+                        <%= userHist[i].address %>
+                    </td>
+                    <td>
+                        <%= userHist[i].date %>
+                    </td>
+                    <td>
+                        <%= userHist[i].price %>
+                    </td>
+                    <td>
+                        <%= userHist[i].total %>
+                    </td>
+                </tr>
+                <% } %>
             </tr>
 
-            <tr>
-                <td>Gallons Requested Value</td>
-                <td>Delivery Address Value Delivery Address Value Delivery Address Value Delivery Address Value</td>
-                <td>Delivery Date Value</td>
-                <td>Suggested Price / Gallon Value</td>
-                <td>Total Amount Due Value</td>
-            </tr>
+        </table>
 
-            <tr>
-                <td>Gallons Requested Value</td>
-                <td>Delivery Address Value Delivery Address Value Delivery Address Value Delivery Address Value</td>
-                <td>Delivery Date Value</td>
-                <td>Suggested Price / Gallon Value</td>
-                <td>Total Amount Due Value</td>
-            </tr>
-
-            <tr>
-                <td>Gallons Requested Value</td>
-                <td>Delivery Address Value Delivery Address Value Delivery Address Value Delivery Address Value</td>
-                <td>Delivery Date Value</td>
-                <td>Suggested Price / Gallon Value</td>
-                <td>Total Amount Due Value</td>
-            </tr>
-            
-        </table>       
+        <form method="POST">
+            <br>
+            <input type="submit" value="Get New Quote">
+        </form>
+               
     </body>
 
 </html>

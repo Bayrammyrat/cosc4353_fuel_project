@@ -39,4 +39,8 @@ const getQuoteRoute = require('./routes/get_quote')
 //app.use('/get_quote.html', getQuoteRoute)
 app.use('/get_quote', getQuoteRoute)
 
+//Get Quote History Route
+const getQuoteHistoryRoute = require('./routes/quote_history')
+app.use('/quote_history', getQuoteHistoryRoute)
+
 app.listen(PORT, () => console.log('Server Started on Port ' + PORT))
