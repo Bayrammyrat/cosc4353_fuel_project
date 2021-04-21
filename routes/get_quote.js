@@ -92,6 +92,11 @@ router.post('/:id', async (req, res) => {
         res.redirect(`/quote_history/${userID}`)
     }
 
+    if(req.body.btnClick == "Logout") {
+        console.log("Logout Button Clicked")
+        res.redirect('/login')
+    }
+
     if(req.body.btnClick == "Get Quote") {
         console.log("Get Quote Button Clicked")
         res.render('get_quote', {
